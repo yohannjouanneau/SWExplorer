@@ -26,16 +26,19 @@ class SWApiClient : StarWarsApiClient {
 
     private val client = retrofit.create(SWApiService::class.java)
 
-    override suspend fun getCharacterList(): Flow<List<CharacterModel>> {
-        return flow {
-            val characters = client.fetchPeoples().results
-                .map { people ->
-                    CharacterModel(
-                        uid = people.uid,
-                        name = people.name
-                    )
-                }
-            emit(characters)
-        }
+    override suspend fun getCharacterList(
+        pageNumber: Int,
+        pageSize: Int
+    ): List<CharacterModel> {
+        return client.fetchPeoples(
+            pageNumber = pageNumber,
+            limit = pageSize
+        ).results
+            .map { people ->
+                CharacterModel(
+                    uid = people.uid,
+                    name = people.name
+                )
+            }
     }
 }

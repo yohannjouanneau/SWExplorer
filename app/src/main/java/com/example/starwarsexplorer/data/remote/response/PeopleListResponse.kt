@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class PeopleListResponse(
-    val next: String,
+    val next: String?,
     val results: List<People>
 )
 

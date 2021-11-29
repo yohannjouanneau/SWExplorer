@@ -3,6 +3,7 @@ package com.example.starwarsexplorer.di
 import com.example.starwarsexplorer.data.remote.client.SWApiClient
 import com.example.starwarsexplorer.data.remote.client.StarWarsApiClient
 import com.example.starwarsexplorer.data.repository.SWApiRepository
+import com.example.starwarsexplorer.domain.paging.StarWarsPeopleSource
 import com.example.starwarsexplorer.domain.repository.StarWarsRepository
 import dagger.Module
 import dagger.Provides
@@ -25,5 +26,10 @@ object ApplicationModule {
     @Provides
     fun provideApiClient(): StarWarsApiClient {
         return SWApiClient()
+    }
+
+    @Provides
+    fun provideStarWarsPeopleSource(starWarsRepository: StarWarsRepository): StarWarsPeopleSource {
+        return StarWarsPeopleSource(starWarsRepository)
     }
 }

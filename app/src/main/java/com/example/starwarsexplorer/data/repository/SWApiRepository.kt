@@ -12,7 +12,13 @@ class SWApiRepository @Inject constructor(
     private val apiClient: StarWarsApiClient
 ): StarWarsRepository {
 
-    override suspend fun getCharacterList(): Flow<List<CharacterModel>> {
-        return apiClient.getCharacterList()
+    override suspend fun getCharacterList(
+        pageNumber: Int,
+        pageSize: Int
+    ): List<CharacterModel> {
+        return apiClient.getCharacterList(
+            pageNumber = pageNumber,
+            pageSize = pageSize
+        )
     }
 }
